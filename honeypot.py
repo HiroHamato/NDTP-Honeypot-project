@@ -6,8 +6,8 @@ import threading
 import requests
 from datetime import datetime
 
-port = 2222
-TOKEN = ""
+port = 22
+TOKEN = "6454211004:AAGHjg0F8dCXneF7O7CzLTO0NRukE-_auq8"
 chat_id = ""
 server_key = paramiko.RSAKey.generate(2048)
 
@@ -19,10 +19,8 @@ class SSHServer(paramiko.ServerInterface):
 		requests.get(url)
 		return paramiko.AUTH_FAILED
 
-
 def handle_connection(client_sock):
 	transport = paramiko.Transport(client_sock)
-	print(f"thread created")
 	# server_key = paramiko.RSAKey.from_private_key_file("C:/Users/Admin/Desktop/custom ssh honeypot v2/key")
 	transport.add_server_key(server_key)
 	ssh = SSHServer()
@@ -42,7 +40,7 @@ def main():
 		t = threading.Thread(target=handle_connection,args=(client_sock,))
 		t.start()
 
-
 if __name__ == "__main__":
 	chat_id=input("Write your telegram chatID: ")
+	print("SSH honeypot started!")
 	main()
